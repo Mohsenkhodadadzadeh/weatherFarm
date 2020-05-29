@@ -6,18 +6,19 @@
 //  Copyright © 2020 mohsen. All rights reserved.
 //
 
-import Foundation
-
+import UIKit
+import Combine
 class Response200: ChainProtocol {
-    func calculate<T: BaseModelProtocol>(_ unserilized: [String: Any], status: Int) throws -> T {
+    func calculate<T: BaseModelProtocol>(_ unserilized: [String: Any], status: Int) -> AnyPublisher<T,HttpError> {
+        
         if status == 200 {
             let retObj = T(unserilized)
-            return retObj
+            return Result.success(retObj).publisher.eraseToAnyPublisher()
         } else {
             if next != nil {
-                return try next!.calculate(unserilized, status: status)
+                return next!.calculate(unserilized, status: status)
             }
-            throw NSError(domain: "chainError", code: 100, userInfo: [NSLocalizedDescriptionKey: "End of Chain!!!"])
+            return Result.failure(HttpError.noContent).publisher.eraseToAnyPublisher()
         }
     }
     var next: ChainProtocol?

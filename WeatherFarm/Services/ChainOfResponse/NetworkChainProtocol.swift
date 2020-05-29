@@ -7,9 +7,9 @@
 //
 
 import Foundation
-
+import Combine
 protocol ChainProtocol {
     
-    func calculate <T: BaseModelProtocol>(_ unserilized: [String: Any], status: Int) throws -> T
+    func calculate <T: BaseModelProtocol>(_ unserilized: [String: Any], status: Int) -> AnyPublisher<T,HttpError>
     var next: ChainProtocol? { get set}
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol BaseModelProtocol {
+protocol BaseModelProtocol: Codable {
     
     init(_ model: Any)
 }

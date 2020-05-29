@@ -7,17 +7,16 @@
 //
 
 import Foundation
-
+import Combine
 class Response204: ChainProtocol {
-    func calculate<T: BaseModelProtocol>(_ unserilized: [String: Any], status: Int) throws -> T {
+    func calculate<T: BaseModelProtocol>(_ unserilized: [String: Any], status: Int) -> AnyPublisher<T,HttpError> {
         if status == 204 {
-            let retObj = T(["state": true])
-            return retObj
+            return Result.failure(HttpError.noContent).publisher.eraseToAnyPublisher()
         } else {
             if next != nil {
-                return try next!.calculate(unserilized, status: status)
+                return next!.calculate(unserilized, status: status)
             }
-            throw NSError(domain: "chainError", code: 100, userInfo: [NSLocalizedDescriptionKey: "End of Chain!!!"])
+            return Result.failure(HttpError.endOfChain).publisher.eraseToAnyPublisher()
         }
     }
     var next: ChainProtocol?
