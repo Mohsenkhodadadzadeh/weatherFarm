@@ -19,6 +19,8 @@ struct OnCallWeatherModel {
     var timeZone: String
     /// Shift in seconds from UTC
     var timeZoneOffset: Double
+    /// current day
+    var currentDay: OnCallCurrentWeatherModel
     /// Daily forecast weather data API response
     var days: [OnCallDailyModel]
     /// Hourly forecast weather data API response

@@ -11,7 +11,7 @@ import Foundation
 
 struct OnCallDailyModel: OnCallDefaultDataProtocol {
     
-    var unixDate: Int
+    var unixDate: Double
     
     var unixSunrise: Int
     
