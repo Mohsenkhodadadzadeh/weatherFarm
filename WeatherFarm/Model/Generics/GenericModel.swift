@@ -18,7 +18,7 @@ struct GenericModel<T>: BaseModelProtocol where T: BaseModelProtocol {
             state = serilizedModel["State"] as? Int
             message = serilizedModel["Message"] as? String
             if let genericContent = serilizedModel["Result"] {
-                result = T.init(genericContent)
+              //  result = T.init(genericContent)
             }
         }
     }

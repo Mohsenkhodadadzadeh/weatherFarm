@@ -9,10 +9,10 @@
 import UIKit
 import Combine
 class Response200: ChainProtocol {
-    func calculate<T: BaseModelProtocol>(_ unserilized: [String: Any], status: Int) -> AnyPublisher<T,HttpError> {
+    func calculate<T: BaseModelProtocol>(_ unserilized: Data, status: Int) -> AnyPublisher<T,HttpError> {
         
         if status == 200 {
-            let retObj = T(unserilized)
+            let retObj = try! JSONDecoder().decode(T.self, from: unserilized)
             return Result.success(retObj).publisher.eraseToAnyPublisher()
         } else {
             if next != nil {

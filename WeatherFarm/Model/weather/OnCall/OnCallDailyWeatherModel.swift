@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct OnCallDailyWeatherModel {
+struct OnCallDailyWeatherModel: BaseModelProtocol {
     
     var id: Int
     

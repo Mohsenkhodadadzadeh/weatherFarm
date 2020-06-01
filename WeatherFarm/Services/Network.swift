@@ -34,7 +34,7 @@ public final class Network {
                         
                         switch response.result {
                         case let .success(value):
-                            if let returnValue = value as? [String: Any] {
+                            if let returnValue = value as? Data {
                                 if let statusCode = response.response?.statusCode {
                                     let value: AnyPublisher<T,HttpError> = state200.calculate(returnValue, status: statusCode)
                                     value.sink(receiveCompletion: { complition in

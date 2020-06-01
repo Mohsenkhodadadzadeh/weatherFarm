@@ -10,5 +10,4 @@ import Foundation
 
 protocol BaseModelProtocol: Codable {
     
-    init(_ model: Any)
 }

@@ -20,18 +20,18 @@ class MainPageViewModel: ObservableObject {
     var dailyState: [DailyViewModel] = []
     
     init(_ oncallState: OnCallWeatherModel) {
-        currentTemp = String(describing: oncallState.currentDay.currentTemperature)
-        minMaxTemp = "\(oncallState.days[0].temperature.min)°/\(oncallState.days[0].temperature.max)°"
-        let location = CLLocation(latitude: oncallState.latitude, longitude: oncallState.longitude)
+        currentTemp = String(describing: oncallState.current.temp)
+        minMaxTemp = "\(oncallState.daily[0].temp.min)°/\(oncallState.daily[0].temp.max)°"
+        let location = CLLocation(latitude: oncallState.lat, longitude: oncallState.lon)
         location.fetchCityAndCountry { city, country, error in
             guard let strongCity = city else  { return}
             self.city = strongCity
         }
-        for item in oncallState.hours {
+        for item in oncallState.hourly {
             let processedItem = HourlyViewModel(item)
             hourlyState.append(processedItem)
         }
-        for item in oncallState.days {
+        for item in oncallState.daily {
             let processedItem = DailyViewModel(item)
             dailyState.append(processedItem)
         }

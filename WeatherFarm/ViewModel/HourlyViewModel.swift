@@ -14,7 +14,7 @@ class HourlyViewModel: ObservableObject {
     @Published var weatherState: Image!
     
     init(_ onCallHourly: OnCallHourlyModel) {
-        let date = Date(timeIntervalSince1970: onCallHourly.unixDate)
+        let date = Date(timeIntervalSince1970: onCallHourly.dt)
         hourTime = String(describing: Calendar.current.component(.hour, from: date))
         
         var weatherIconName: String

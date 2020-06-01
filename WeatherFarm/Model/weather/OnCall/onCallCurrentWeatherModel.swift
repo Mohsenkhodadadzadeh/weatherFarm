@@ -8,22 +8,22 @@
 
 import Foundation
 
-struct OnCallCurrentWeatherModel: OnCallDefaultDataProtocol {
-    var unixDate: Double
+struct OnCallCurrentWeatherModel: OnCallDefaultDataProtocol, BaseModelProtocol {
+    var dt: Double
     
     var pressure: Int
     
     var humidity: Int
     
-    var dewPoint: Double
+    var dew_point: Double
     
-    var windSpeed: Double
+    var wind_speed: Double
     
-    var windDegree: Int
+    var wind_deg: Int
     
     var weather: [OnCallDailyWeatherModel]
     /// Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
-    var currentTemperature: Int
+    var temp: Double
     
     
     

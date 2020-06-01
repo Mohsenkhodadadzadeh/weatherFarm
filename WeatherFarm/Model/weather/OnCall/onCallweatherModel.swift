@@ -10,20 +10,23 @@ import Foundation
 /**
             This model is used as the base model for OnCall API Model
  */
-struct OnCallWeatherModel {
+struct OnCallWeatherModel: BaseModelProtocol {
+   
+    
     /// Geographical coordinates of the location (latitude)
-    var latitude: Double
+    var lat: Double
     /// Geographical coordinates of the location (longitude)
-    var longitude: Double
+    var lon: Double
     /// Timezone name for the requested location
-    var timeZone: String
+    var timezone: String
     /// Shift in seconds from UTC
-    var timeZoneOffset: Double
+    var timezone_offset: Double
     /// current day
-    var currentDay: OnCallCurrentWeatherModel
+    var current: OnCallCurrentWeatherModel
     /// Daily forecast weather data API response
-    var days: [OnCallDailyModel]
+    var daily: [OnCallDailyModel]
     /// Hourly forecast weather data API response
-    var hours: [OnCallHourlyModel]
+    var hourly: [OnCallHourlyModel]
+    
     
 }

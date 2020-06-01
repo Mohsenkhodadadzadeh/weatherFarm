@@ -14,8 +14,8 @@ struct GenericArray<T>: BaseModelProtocol where T: BaseModelProtocol {
         object = [T]()
         if let serilizedModel = model as? [Any] {
             for item in serilizedModel {
-                let appendObj = T.init(item)
-                object.append(appendObj)
+               // let appendObj = T.init(item)
+             //   object.append(appendObj)
             }
         }
     }

@@ -7,14 +7,17 @@
 //
 
 import SwiftUI
+import Combine
 
 struct MainView: View {
     init() {
         
     }
     var cityName: String = "Miami"
+    var onCallWeather: OnCallWeatherModel?
+    var mainpageViewModel: MainPageViewModel?
     var body: some View {
-        ZStack {
+                ZStack {
             BackgroundView()
             VStack (alignment: .center, spacing: 10) {
                 CityButton(cityName: cityName)
@@ -59,6 +62,21 @@ struct MainView: View {
             
         }
         
+    }
+    mutating func receiveData() {
+        var result = self
+        let data: Future<OnCallWeatherModel,HttpError> = Network().getData(url: URLGeneration.OnCall.shared.getOnCallData(latitude: 1111, longitude: 1111, exclude: .current,.hourly,.daily), method: .get, parameters: nil, headers: nil)
+        data.sink(receiveCompletion: { completionFlag in
+            switch completionFlag {
+            case .failure(let errorData):
+                print("Error in line \(#line) func \(#function) class MainView.swift is: \(errorData.localizedDescription)")
+            case .finished:
+                print("Data was received")
+            }
+        }) { value in
+            result.mainpageViewModel = MainPageViewModel(value)
+        }
+        self = result
     }
 }
 

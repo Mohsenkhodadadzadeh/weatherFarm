@@ -17,7 +17,7 @@ class DailyViewModel: ObservableObject {
     @Published var maximumTemperature: Double!
     
     init(_ onCallDaily: OnCallDailyModel) {
-        let dayTime = Date(timeIntervalSince1970: onCallDaily.unixDate)
+        let dayTime = Date(timeIntervalSince1970: onCallDaily.dt)
         dayOfWeek = dayTime.dayOfWeek() ?? " "
         var weatherIconName: String
         switch onCallDaily.weather[0].id {
@@ -37,8 +37,8 @@ class DailyViewModel: ObservableObject {
             weatherIconName = "cloud.sun.bolt" // :))
         }
         weatherImage = Image(systemName: weatherIconName)
-        minimumTemperature = onCallDaily.temperature.min
-        maximumTemperature = onCallDaily.temperature.max
+        minimumTemperature = onCallDaily.temp.min
+        maximumTemperature = onCallDaily.temp.max
         
     }
 }

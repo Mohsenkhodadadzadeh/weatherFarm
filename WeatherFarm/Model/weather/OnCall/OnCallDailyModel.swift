@@ -9,25 +9,25 @@
 import Foundation
 
 
-struct OnCallDailyModel: OnCallDefaultDataProtocol {
+struct OnCallDailyModel: OnCallDefaultDataProtocol, BaseModelProtocol {
     
-    var unixDate: Double
+    var dt: Double
     
-    var unixSunrise: Int
+    var sunrise: Int
     
-    var unixSunset: Int
+    var sunset: Int
     
-    var temperature: OnCallDayTempModel
+    var temp: OnCallDayTempModel
     
     var pressure: Int
     
     var humidity: Int
     
-    var dewPoint: Double
+    var dew_point: Double
     
-    var windSpeed: Double
+    var wind_speed: Double
     
-    var windDegree: Int
+    var wind_deg: Int
     
     var weather: [OnCallDailyWeatherModel]
     
@@ -37,10 +37,10 @@ struct OnCallDailyModel: OnCallDefaultDataProtocol {
     
     var snow: Double
     
-    var uvInMidDay: Double
+    var uvi: Double
 }
 
-struct OnCallDayTempModel {
+struct OnCallDayTempModel: BaseModelProtocol {
     
     var day: Double
     

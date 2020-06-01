@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 class NotResponse404: ChainProtocol {
-    func calculate<T: BaseModelProtocol>(_ unserilized: [String: Any], status: Int) -> AnyPublisher<T,HttpError> {
+    func calculate<T: BaseModelProtocol>(_ unserilized: Data, status: Int) -> AnyPublisher<T,HttpError> {
         if status == 404 {
             return Result.failure(HttpError.notFound).publisher.eraseToAnyPublisher()
         } else {

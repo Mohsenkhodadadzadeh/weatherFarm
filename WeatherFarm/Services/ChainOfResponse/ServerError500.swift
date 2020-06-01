@@ -9,7 +9,7 @@
 import Foundation
 import  Combine
 class ServerError500: ChainProtocol {
-    func calculate<T: BaseModelProtocol>(_ unserilized: [String: Any], status: Int) -> AnyPublisher<T,HttpError> {
+    func calculate<T: BaseModelProtocol>(_ unserilized: Data, status: Int) -> AnyPublisher<T,HttpError> {
         if status == 500 {
             return Result.failure(HttpError.internalServerError).publisher.eraseToAnyPublisher()
         } else {

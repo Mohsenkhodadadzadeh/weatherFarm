@@ -12,11 +12,11 @@ import Foundation
     - SeeAlso:  `OnCallWeatherModel.swift`
  
  */
-struct OnCallHourlyModel: OnCallDefaultDataProtocol {
+struct OnCallHourlyModel: OnCallDefaultDataProtocol, BaseModelProtocol {
     
-    var unixDate: Double
+    var dt: Double
     /// Temperature. Unit Default: Kelvin
-    var temperature: Double
+    var temp: Double
     
     var pressure: Int
     
@@ -28,11 +28,11 @@ struct OnCallHourlyModel: OnCallDefaultDataProtocol {
     
     var snow: Double
     
-    var windSpeed: Double
+    var wind_speed: Double
     
-    var windDegree: Int
+    var wind_deg: Int
     
-    var dewPoint: Double
+    var dew_point: Double
      
     var weather: [OnCallDailyWeatherModel]
     
