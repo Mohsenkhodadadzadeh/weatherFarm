@@ -16,7 +16,7 @@ import Foundation
 */
 protocol OnCallDefaultDataProtocol {
     /// Return or save time of the forecasted data, unix, UTC
-    var unixDate: Int { get set }
+    var unixDate: Double { get set }
     /// Atmospheric pressure on the sea level, hPa
     var pressure: Int { get set }
     /// Humidity, %

@@ -14,7 +14,7 @@ import Foundation
  */
 struct OnCallHourlyModel: OnCallDefaultDataProtocol {
     
-    var unixDate: Int
+    var unixDate: Double
     /// Temperature. Unit Default: Kelvin
     var temperature: Double
     
