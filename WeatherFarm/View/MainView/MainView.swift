@@ -10,6 +10,9 @@ import SwiftUI
 import Combine
 
 struct MainView: View {
+    init(_ viewModel: MainPageViewModel) {
+        mainpageViewModel = viewModel
+    }
     init() {
         
     }
@@ -26,31 +29,34 @@ struct MainView: View {
                 craftImageView(image: Image("lightCraft"))
                    // .layoutPriority(1)
                     
-                Text("31°")
+                Text(mainpageViewModel?.currentTemp ?? "31°")
                     .font(.system(size: 60))
                     .fontWeight(.heavy)
                     .foregroundColor(Color("FontColor"))
                     .padding(.top, 10)
                     //.layoutPriority(1)
-                Text("31°/20°")
+                Text(mainpageViewModel?.minMaxTemp ?? "31°/20°")
                     .font(.caption)
                     .fontWeight(.light)
                     .foregroundColor(Color("FontColor"))
                   //  .layoutPriority(2)
                       Spacer()
-                HorizontalWeather(structContent: [HourlyState(time: "Now", image: "sun.min.fill"), HourlyState(time: "4", image: "cloud.rain"),  HourlyState(time: "5", image: "cloud.rain"),  HourlyState(time: "6", image: "cloud.rain"),  HourlyState(time: "7", image: "cloud.rain")])
-                    .cornerRadius(50)
-                    .padding([.leading, .trailing], 30)
+                HorizontalWeather(structContent: mainpageViewModel?.hourlyState ?? [])
+                .cornerRadius(50)
+                .padding([.leading, .trailing], 30)
+//                HorizontalWeather(structContent: [HourlyState(time: "Now", image: "sun.min.fill"), HourlyState(time: "4", image: "cloud.rain"),  HourlyState(time: "5", image: "cloud.rain"),  HourlyState(time: "6", image: "cloud.rain"),  HourlyState(time: "7", image: "cloud.rain")])
+                    
                     //.layoutPriority(2)
                 
-                
-                verticalWeatherDays(content: [DailyState(day: "Friday", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
-                DailyState(day: "Saturday", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
-                DailyState(day: "SunDay", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
-                DailyState(day: "Monday", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
-                DailyState(day: "anyDay", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12)])
-                    .padding([.trailing, .leading, .bottom], 40)
-                    .foregroundColor(Color("FontColor"))
+                verticalWeatherDays(content: mainpageViewModel?.dailyState ?? [])
+                .padding([.trailing, .leading, .bottom], 40)
+                .foregroundColor(Color("FontColor"))
+//                verticalWeatherDays(content: [DailyState(day: "Friday", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
+//                DailyState(day: "Saturday", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
+//                DailyState(day: "SunDay", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
+//                DailyState(day: "Monday", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
+//                DailyState(day: "anyDay", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12)])
+//                    
                 
                 
                 
@@ -64,6 +70,7 @@ struct MainView: View {
         
     }
     mutating func receiveData() {
+        var disposable = Set<AnyCancellable>()
         var result = self
         let data: Future<OnCallWeatherModel,HttpError> = Network().getData(url: URLGeneration.OnCall.shared.getOnCallData(latitude: 1111, longitude: 1111, exclude: .current,.hourly,.daily), method: .get, parameters: nil, headers: nil)
         data.sink(receiveCompletion: { completionFlag in
@@ -75,7 +82,7 @@ struct MainView: View {
             }
         }) { value in
             result.mainpageViewModel = MainPageViewModel(value)
-        }
+        }.store(in: &disposable)
         self = result
     }
 }

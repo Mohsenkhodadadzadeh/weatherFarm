@@ -9,21 +9,21 @@
 import SwiftUI
 
 struct HorizontalWeather: View {
-    var structContent: [HourlyState]
+    var structContent: [HourlyViewModel]
     var body: some View {
         HStack {
             
-            horizontalWeatherItem(captionText: structContent[0].stateTime, weatherIcon: structContent[0].image)
+            horizontalWeatherItem(captionText: structContent[safe: 0]?.hourTime ?? "Now", weatherIcon: structContent[safe: 0]?.weatherState ?? Image(systemName: "sun.min.fill"))
                 .padding(.leading, 25)
                 .padding([.top, .bottom], 10)
             Spacer()
-            horizontalWeatherItem(captionText: structContent[1].stateTime, weatherIcon: structContent[1].image)
+            horizontalWeatherItem(captionText: structContent[safe: 1]?.hourTime ?? "1", weatherIcon: structContent[safe: 1]?.weatherState ?? Image(systemName: "sun.min.fill"))
             Spacer()
-            horizontalWeatherItem(captionText: structContent[2].stateTime, weatherIcon: structContent[2].image)
+            horizontalWeatherItem(captionText: structContent[safe: 2]?.hourTime ?? "2", weatherIcon: structContent[safe: 2]?.weatherState ?? Image(systemName: "sun.min.fill"))
             Spacer()
-            horizontalWeatherItem(captionText: structContent[3].stateTime, weatherIcon: structContent[3].image)
+            horizontalWeatherItem(captionText: structContent[safe: 3]?.hourTime ?? "3", weatherIcon: structContent[safe: 3]?.weatherState ?? Image(systemName: "sun.min.fill"))
             Spacer()
-            horizontalWeatherItem(captionText: structContent[4].stateTime, weatherIcon: structContent[4].image)
+            horizontalWeatherItem(captionText: structContent[safe: 4]?.hourTime ?? "4", weatherIcon: structContent[safe: 4]?.weatherState ?? Image(systemName: "sun.min.fill"))
                 .padding(.trailing, 25)
             
            
@@ -32,7 +32,7 @@ struct HorizontalWeather: View {
         
     }
     
-    init(structContent: [HourlyState]) {
+    init(structContent: [HourlyViewModel]) {
         if structContent.count < 5 {
             fatalError("this portion needs 5 item to show")
         }
@@ -51,8 +51,8 @@ struct HorizontalWeather: View {
 //    }
 }
 
-struct HorizontalWeather_Previews: PreviewProvider {
-    static var previews: some View {
-        HorizontalWeather(structContent: [HourlyState(time: "now", image: "cloud.bolt"), HourlyState(time: "4", image: "cloud.rain"),  HourlyState(time: "5", image: "cloud.bolt"),  HourlyState(time: "6", image: "cloud.rain"),  HourlyState(time: "7", image: "cloud.bolt") ])
-    }
-}
+//struct HorizontalWeather_Previews: PreviewProvider {
+//    static var previews: some View {
+////        HorizontalWeather(structContent: [HourlyViewModel(time: "now", image: "cloud.bolt"), HourlyState(time: "4", image: "cloud.rain"),  HourlyState(time: "5", image: "cloud.bolt"),  HourlyState(time: "6", image: "cloud.rain"),  HourlyState(time: "7", image: "cloud.bolt") ])
+//    }
+//}

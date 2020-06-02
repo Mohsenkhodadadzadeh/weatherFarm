@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct verticalWeatherDays: View {
-    var content: [DailyState] = []
+    var content: [DailyViewModel] = []
     var body: some View {
         VStack {
                 verticalWeatherDaysItem(content: self.content[0])
@@ -22,7 +22,7 @@ struct verticalWeatherDays: View {
         }
     }
     
-    init(content: [DailyState]) {
+    init(content: [DailyViewModel]) {
         if content.count < 5 {
             fatalError("fill 5 objects for it")
         }
@@ -31,13 +31,13 @@ struct verticalWeatherDays: View {
 }
 
 
-struct verticalWeatherDays_Previews: PreviewProvider {
-    static var previews: some View {
-        verticalWeatherDays(content: [DailyState(day: "Friday", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
-                                      DailyState(day: "Saturday", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
-                                      DailyState(day: "SunDay", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
-                                      DailyState(day: "Monday", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
-                                      DailyState(day: "anyDay", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12)])
-    }
-}
+//struct verticalWeatherDays_Previews: PreviewProvider {
+//    static var previews: some View {
+//        verticalWeatherDays(content: [DailyState(day: "Friday", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
+//                                      DailyState(day: "Saturday", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
+//                                      DailyState(day: "SunDay", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
+//                                      DailyState(day: "Monday", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12),
+//                                      DailyState(day: "anyDay", stateName: "cloud.sun.fill", minTemp: 10, maxTemp: 12)])
+//    }
+//}
 
